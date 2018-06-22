@@ -1,0 +1,5 @@
+runtime: php55
+api_version: 1
+
+- url: /setup/webhook
+  script: bot.php
