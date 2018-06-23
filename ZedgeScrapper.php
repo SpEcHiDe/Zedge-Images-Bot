@@ -15,8 +15,13 @@ function fetch_website($required_url) {
 }
 
 function fetch_json($raw_html, $script_id) {
+  // hide DOM parsing errors
+  libxml_use_internal_errors(true);
+  libxml_clear_errors();
+
   $dom = new DOMDocument();
   $dom->loadHTML($raw_html);
+
   $raw_json = $dom->getElementById($script_id)->textContent;
   $final_json = str_replace("&q;", "\"", $raw_json);
   return $final_json;
@@ -37,6 +42,7 @@ function GetImgUrl($search_query) {
   $items_obj = $json_obj[$before_item_key]["items"];
   foreach ($items_obj as $key => $value) {
     $current_item = $value["layout_params"];
+    $high_res_canonical_url = "https://www.zedge.net/wallpaper/" . $value["click_action"]["action"]["item_details"]["reference"]["uuid"] . "";
     if($current_item["detailed_audio_player"] != null) {
       // a ringtone has been returned
       $ring_tone_item = $current_item["detailed_audio_player"];
@@ -47,11 +53,21 @@ function GetImgUrl($search_query) {
         "title" => $ring_tone_item["title"],
         "caption" => "Subscribe @MalayalamTrollVoice",
         "parse_mode" => "Markdown",
-        "performer" => $ring_tone_item["author_name"]
+        "performer" => $ring_tone_item["author_name"],
+        "reply_markup" => array(
+          "inline_keyboard" => array(
+            array(
+              array(
+                "text" => "High Resolution Download",
+                "url" => $high_res_canonical_url
+              )
+            )
+          )
+        )
       );
       $return_array[] = $r;
     }
-    if($current_item["detailed_thumb"] != null) {
+    else if($current_item["detailed_thumb"] != null) {
       // a wallpaper has been returned
       $wall_paper_item = $current_item["detailed_thumb"];
       $r = array(
@@ -63,9 +79,20 @@ function GetImgUrl($search_query) {
         "description" => $wall_paper_item["subtitle"],
         "caption" => "Subscribe @MalayalamTrollVoice",
         "parse_mode" => "Markdown",
+        "reply_markup" => array(
+          "inline_keyboard" => array(
+            array(
+              array(
+                "text" => "High Resolution Download",
+                "url" => $high_res_canonical_url
+              )
+            )
+          )
+        )
       );
       $return_array[] = $r;
     }
   }
   return $return_array;
 }
+

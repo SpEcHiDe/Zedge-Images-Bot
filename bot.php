@@ -19,7 +19,11 @@ if(isset($update['message']['text']) and $update['message']['text'] === "/start"
     $msg_id = $update['message']['message_id'];
     $chat_id = $update['message']['chat']['id'];
     $name = $update['message']['from']['first_name'];
-    $telegram->sendMessage($chat_id, "The UseLess Bot. Subscribe @ZedgeImages to know more!", ['reply_to_message_id' => $msg_id]);
+    $telegram->sendMessage(
+        $chat_id,
+        "The UseLess Bot. Subscribe @ZedgeImages to know more! \r\n I'm using [this](https://github.com/Kyle2142/PHPBot) awesome library.",
+        ['reply_to_message_id' => $msg_id, 'disable_web_page_preview' => True]
+    );
 }
 
 if(isset($update["inline_query"]) and $update["inline_query"] != ""){
