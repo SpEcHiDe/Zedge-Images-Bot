@@ -51,7 +51,7 @@ function GetImgUrl($search_query) {
         "id" => $key,
         "audio_url" => $ring_tone_item["audio_url"],
         "title" => $ring_tone_item["title"],
-        "caption" => "Subscribe @MalayalamTrollVoice",
+        "caption" => "Join @ZedgeImages for the best wallpapers and ringtones!",
         "parse_mode" => "Markdown",
         "performer" => $ring_tone_item["author_name"],
         "reply_markup" => array(
@@ -77,7 +77,7 @@ function GetImgUrl($search_query) {
         "thumb_url" => $wall_paper_item["thumb_url"],
         "title" => $wall_paper_item["title"],
         "description" => $wall_paper_item["subtitle"],
-        "caption" => "Subscribe @MalayalamTrollVoice",
+        "caption" => "Join @ZedgeImages for the best wallpapers and ringtones!",
         "parse_mode" => "Markdown",
         "reply_markup" => array(
           "inline_keyboard" => array(
