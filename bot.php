@@ -1,11 +1,10 @@
 <?php
-
 /*
  * @author @SpEcHIDe
  */
 
 require_once __DIR__ . "/kyle2142_PHPBot.php";
-require_once __DIR__ . "/ZedgeScrapper.php";
+require_once __DIR__ . "/functions.php";
 require_once __DIR__ . "/config.php";
 
 $telegram = new kyle2142\PHPBot($TG_BOT_TOKEN);
